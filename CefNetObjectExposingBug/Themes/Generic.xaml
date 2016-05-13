@@ -1,0 +1,42 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CefNetObjectExposingBug">
+
+
+    <Style TargetType="{x:Type local:CefBrowser}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CefBrowser}">
+                    <Grid x:Name="_contentRoot" Width="300">
+                        <Border x:Name="_root"
+                                Background="DarkTurquoise"
+                                BorderThickness="0">
+                            <!--  We put the cefBrowser here from code  -->
+                        </Border>
+                        <Border x:Name="indicator"
+                                Height="300"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                Background="OrangeRed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:MassCefBrowserControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MassCefBrowserControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel x:Name="_root" Orientation="Horizontal">
+                            <!--  We put the browsers here from code  -->
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

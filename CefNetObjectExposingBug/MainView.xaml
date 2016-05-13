@@ -1,0 +1,58 @@
+﻿<Page x:Class="CefNetObjectExposingBug.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:CefNetObjectExposingBug"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:tabControl="clr-namespace:SmartDesign.TabControl;assembly=WPF.SmartDesign.TabControl"
+      Title="MainView"
+      d:DesignHeight="300"
+      d:DesignWidth="300"
+      DataContext="{Binding Main,
+                            Source={StaticResource Locator}}"
+      mc:Ignorable="d">
+
+    <Grid>
+        <tabControl:TabControl CacheLength="5"
+                               ItemsSource="{Binding Tabs}"
+                               SelectedItem="{Binding SelectedTab,
+                                                      Mode=TwoWay}">
+            <tabControl:TabControl.HeaderTemplate>
+                <ControlTemplate TargetType="tabControl:HeaderControl">
+                    <Grid Background="Azure">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="10" Command="{Binding AddTab}">Add new tab</Button>
+                        <ContentPresenter Grid.Column="1"
+                                          Margin="0"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Grid>
+                </ControlTemplate>
+            </tabControl:TabControl.HeaderTemplate>
+            <tabControl:TabControl.HeaderItemTemplate>
+                <DataTemplate>
+                    <Border Background="Transparent">
+                        <TextBlock Text="{Binding Name}" />
+                    </Border>
+                </DataTemplate>
+            </tabControl:TabControl.HeaderItemTemplate>
+            <tabControl:TabControl.ItemTemplate>
+                <DataTemplate>
+                    <ScrollViewer HorizontalScrollBarVisibility="Visible">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <local:MassCefBrowserControl Grid.Column="0" BrowserUrls="{Binding BrowserUrls}" />
+                        </Grid>
+                    </ScrollViewer>
+                </DataTemplate>
+            </tabControl:TabControl.ItemTemplate>
+        </tabControl:TabControl>
+    </Grid>
+</Page>

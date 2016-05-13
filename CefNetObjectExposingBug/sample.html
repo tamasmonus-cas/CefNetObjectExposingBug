@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>.NET object exposing check</title>
+    <script>
+        var loaded = function() {
+            if (window.SDXHost) {
+                window.SDXHost.postMessage('try this out');
+                document.getElementById("checkDiv").innerText = ".NET object is exposed!";
+            } else {
+                document.getElementById("checkDiv").innerText = ".NET object is NOT exposed!";
+            }
+        };
+    </script>
+</head>
+    <body onload="loaded()">
+        <div id="checkDiv">Hello world!</div>
+    </body>
+</html>
